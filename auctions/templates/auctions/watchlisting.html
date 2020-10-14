@@ -1,0 +1,101 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>My Watchlist</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="{% url 'index' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="{% url 'viewuserswatchlist' %}">My Watchlist</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Auction Price (GHS)</th>
+                            <th scope="col">View</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for watchlistForUser in userWatchlistRecords %}
+
+                        <tr>
+                            <td>
+                                <div class="media">
+                                     
+                                    <div class="d-flex">
+                                        
+                                        {% if not watchlistForUser.auctionbw.item_image_url %}
+                                        <img width="150" height="150" style="border-radius:5px;" src="static/img/noimage.png" alt="NO-IMAGE-AVAILABLE">
+                                        {% else %}
+                                        <img width="150" height="150" style="border-radius:5px;" src="{{MEDIA_URL }}{{watchlistForUser.auctionbw.item_image_url}}" alt="">
+                                      
+                                        {% endif %}
+
+                                    
+                                    </div>
+
+                                    <div class="media-body">
+                                        <p>{{watchlistForUser.auctionbw.item_name}}</p>
+                                        <p>{{watchlistForUser.auctionbw.item_title}}</p>
+                                        <p>{{watchlistForUser.auctionbw.item_description}}</p>
+                                    </div>
+                                </div>
+
+
+                            </td>
+
+                            <td>
+                                <h5>{{watchlistForUser.auctionbw.item_bid_price}}</h5>
+                            </td>
+
+                            <td> 
+
+                           
+                                <a class="primary-btn" href="{% url 'singlewatchlistview' watchlistForUser.id %}">View Watchlist</a>
+
+                          
+
+                        </td>
+
+
+
+                       </tr>     
+
+
+
+
+                        {% empty %}
+                        <li>No Records!!!!.</li>
+                        {% endfor %}
+
+                       
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+    
+
+ 
+    
+
+ 
+
+{% endblock %}

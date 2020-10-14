@@ -1,0 +1,96 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Watchlist Item Details</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="#">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">Shop<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">product-details</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="product_image_area">
+    <div class="container">
+        <div class="row s_product_inner">
+            <div class="col-lg-6">
+                <div class="s_Product_carousel">
+                    
+                    {% if not usersinglewatchlist.auctionbw.item_image_url %}
+                  
+
+                    <div class="single-prd-item">
+                        <img width="555" height="600"  src="static/img/noimage.png" alt="NO-IMAGE-AVAILABLE"/>
+                    </div>
+
+                    <div class="single-prd-item">
+                        <img width="555" height="600"   src="static/img/noimage.png"  alt="NO-IMAGE-AVAILABLE"/>
+                    </div>
+
+                    {% else %}
+
+                    <div class="single-prd-item">
+                        <img width="555" height="600" class="img-fluid" src="{{MEDIA_URL }}{{usersinglewatchlist.auctionbw.item_image_url}}" alt="">
+                    </div>
+
+                    <div class="single-prd-item">
+                        <img width="555" height="600" class="img-fluid" src="{{MEDIA_URL }}{{usersinglewatchlist.auctionbw.item_image_url}}" alt="">
+                    </div>
+                  
+                    {% endif %}
+                    
+                </div>
+
+            </div>
+            
+            <div class="col-lg-5 offset-lg-1">
+                <div class="s_product_text">
+                    <h3>Name : {{usersinglewatchlist.auctionbw.item_name}} </h3>
+                    <h2>Price (GHS) : {{usersinglewatchlist.auctionbw.item_bid_price}}</h2>
+                    <ul class="list">
+                        <li><a class="active" href="#"><span>Category</span> : {{usersinglewatchlist.auctionbw.item_category}}</a></li>
+                        <form action="{% url 'removewatchlistitem' usersinglewatchlist.id %}" method="post"> 
+                            {% csrf_token %}
+                           <div class="card_area d-flex align-items-center">
+                               <button onclick="return(confirm('Are you sure, you want remove item?\nClick cancel to stop action!'))" style="height: 40px;" class="success-btn" type="submit"><small>Remove Item</small> 
+                           
+                            </button>
+                            
+                             
+                           </div>
+                       
+                       </form>
+                    </ul>
+                    <p>
+                        Item title: <br/>
+                        {{usersinglewatchlist.auctionbw.item_title}}
+                    
+                    </p>
+
+                        
+ 
+
+                    <br/>
+
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+
+ 
+    
+
+
+    
+
+{% endblock %}

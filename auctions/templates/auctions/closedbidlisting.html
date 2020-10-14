@@ -1,0 +1,94 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>List Of Closed Auctions</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="category.html">Register</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">View</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for closedbid in closedbids %}
+
+                        <tr>
+                            <td>
+                                <div class="media">
+                                     
+                                    <div class="d-flex">
+                                        
+                                        {% if not closedbid.item_image_url %}
+                                        <img width="150" height="150" style="border-radius:5px;" src="static/img/noimage.png" alt="NO-IMAGE-AVAILABLE">
+                                        {% else %}
+                                        <img width="150" height="150" style="border-radius:5px;" src="{{MEDIA_URL }}{{closedbid.item_image_url}}" alt="">
+                                      
+                                        {% endif %}
+
+                                    
+                                    </div>
+
+                                    <div class="media-body">
+                                        <p>{{closedbid.item_name}}</p>
+                                        <p>{{closedbid.item_title}}</p> </br>
+                                        <p>{{closedbid.item_description}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>{{closedbid.item_bid_price}}</h5>
+                            </td>
+                             
+                            <td> 
+
+                           
+                                <a class="primary-btn" href="{% url 'viewwinner' closedbid.id closedbid.item_bid_price %}">View Winner</a>      
+
+                              
+
+                            </td>
+                        </tr> 
+                        {% empty %}
+                        <li>No Records!!!!.</li>
+                        {% endfor %}
+
+                       
+                      
+                       
+                       
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+    
+
+ 
+    
+
+ 
+
+{% endblock %}

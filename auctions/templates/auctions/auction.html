@@ -1,0 +1,99 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Create Auction</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="category.html">Register</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <section class="login_box_area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="login_box_img">
+						<img style="height: auto 608px;" class="img-fluid" src="static/img/category/c3.jpg" alt="">
+						<div class="hover">
+							<h4>Create and list auctions in just a step!!!</h4>
+							<p>CS50-commerce, your fast growing auction site...</p>
+                            
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="login_form_inner">
+						<h3>Create Your Auction Item!</h3>
+						<form enctype="multipart/form-data" class="row login_form" action="{% url 'createaution' %}" method="post" id="contactForm" novalidate="novalidate">
+                            {% csrf_token %}
+                            <div class="col-md-12 form-group">
+								<input type="text" class="form-control"   name="item_name" placeholder="Name of item" required >
+                            </div>
+                            
+                            <div class="col-md-12 form-group">
+								<input type="text" class="form-control"   name="item_title" placeholder="Tittle of item" required >
+                            </div>
+
+                            
+                            
+							<div class="col-md-12 form-group">
+								<input type="number" class="form-control"  name="item_bid_price" placeholder="Price of item" required>
+                            </div>
+                            
+                            <div class="col-md-12 form-group">
+                                <textarea  class="form-control"   name="item_description" placeholder="Description of item" required >
+                                    </textarea>
+                            </div>
+                            
+                            <div class="col-md-12 form-group">
+                                <select name="item_category" class="form-control">
+                                    <option value="noValue">--SELECT--</option>
+                                    <option value="Fashion">Fashion</option>
+                                    <option value="Pet">Electronics</option>
+                                    <option value="Pet">Pet</option>
+                                    <option value="Cars">Cars</option>
+                                    
+                                </select>
+                            </div>
+
+                          <div class="col-md-12 form-group">
+								<input type="file" class="form-control" id="item_image_url" name="item_image_url" required >
+                            </div> 
+							 
+							<div class="col-md-12 form-group">
+								<button type="submit" value="submit" class="primary-btn">Register</button>
+								 
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+    <!-- <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input autofocus class="form-control" type="text" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Login">
+    </form>
+
+    Don't have an account? <a href="{% url 'register' %}">Register here.</a> -->
+
+{% endblock %}
